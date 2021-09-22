@@ -1,6 +1,6 @@
 ﻿#dns aanpassen en reverse lookup zone
 $NetworkID = "192.168.1.0/24"
-$ZoneFile = "1.168.192.in-addr.arpa"
+
 
 $IP = "192.168.1.2"
 $MaskBits = 24
@@ -30,7 +30,6 @@ $adapter | set-DnsClientServerAddress -ServerAddresses ($dns1 ,$dns2)
 
 
 #reverse lookup zone
-Add-DnsServerPrimaryZone -NetworkID $NetworkID -ZoneFile $ZoneFile  -DynamicUpdate None -PassThru
-
+Add-DnsServerPrimaryZone -NetworkId $NetworkID -ReplicationScope Domain
+Register-DnsClient
  
-
