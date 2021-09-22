@@ -1,21 +1,14 @@
-﻿# hostname en static ip instellen
+﻿#dns aanpassen en reverse lookup zone
+$NetworkID = "192.168.1.0/24"
+$ZoneFile = "1.168.192.in-addr.arpa"
 
 $IP = "192.168.1.2"
 $MaskBits = 24
 $Gateway = "192.168.1.1"
-$Dns = "172.20.0.2"
 $IPType = "IPv4"
-$hostname = "win07-DC1"
 
-#
-# hostname veranderen
-#
-Rename-Computer -NewName $hostname
-
-
-#
-# static ip instellen
-#
+$dns1 = "192.168.1.2"
+$dns2 = "192.168.1.3"
 
 # Retrieve the network adapter that you want to configure
 $adapter = Get-NetAdapter | where-object {$_.PhysicalMediaType -match "802.3" -and $_.Status -eq "up"}
@@ -32,8 +25,12 @@ $adapter | New-NetIPAddress `
  -IPAddress $IP `
  -PrefixLength $MaskBits `
  -DefaultGateway $Gateway
-# Configure the DNS client server IP addresses
-$adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
+# change dns
+$adapter | set-DnsClientServerAddress -ServerAddresses ($dns1 ,$dns2)
 
-#restart
-Restart-Computer
+
+#reverse lookup zone
+Add-DnsServerPrimaryZone -NetworkID $NetworkID -ZoneFile $ZoneFile  -DynamicUpdate None -PassThru
+
+ 
+
