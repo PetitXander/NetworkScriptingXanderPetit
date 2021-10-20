@@ -1,9 +1,8 @@
 ﻿$Domain = "intranet.mijnschool.be"
-$Site = "Kortrijk"
 $Login = "intranet\administrator"
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
-Install-ADDSDomainController -CreateDnsDelegation:$false -DatabasePath 'C:\Windows\NTDS' -DomainName $Domain -InstallDns:$true -LogPath 'C:\Windows\NTDS' -NoGlobalCatalog:$false -SiteName $Site -SysvolPath 'C:\Windows\SYSVOL' -NoRebootOnCompletion:$true -Force:$true -Credential (Get-Credential $Login)
-Restart-Computer
+Install-ADDSDomainController -CreateDnsDelegation:$false -DatabasePath 'C:\Windows\NTDS' -DomainName $Domain -InstallDns:$true -LogPath 'C:\Windows\NTDS' -NoGlobalCatalog:$false -SysvolPath 'C:\Windows\SYSVOL' -NoRebootOnCompletion:$true -Force:$true -Credential (Get-Credential $Login)
+
 
 #dns aanpassen
 $NetworkID = "192.168.1.0/24"
@@ -34,3 +33,4 @@ $adapter | New-NetIPAddress `
  -DefaultGateway $Gateway
 # change dns
 $adapter | set-DnsClientServerAddress -ServerAddresses ($dns1 ,$dns2)
+Restart-Computer
