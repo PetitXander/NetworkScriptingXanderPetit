@@ -1,10 +1,11 @@
 ﻿Import-Module ActiveDirectory
+#csv inlezen
 $ADUsers = Import-Csv C:\Users\Administrator\Downloads\intranet.mijnschool.be\UserAccounts.csv -Delimiter ";"
 
 $UPN = "mijnschool.be"
 
 foreach ($User in $ADUsers) {
-
+    #username aanpassen
     $Username = $User.Name.ToLower().replace(' ' , '""')
     $Name = $User.Name
     $SamAccountName = $User.SamAccountName
@@ -25,7 +26,7 @@ foreach ($User in $ADUsers) {
             -GivenName $GivenName `
             -Surname $Surname `
             -DisplayName $DisplayName `
-            -AccountPassword (ConvertTo-secureString $AccountPassword -AsPlainText -Force) `
+            -AccountPassword (ConvertTo-secureString $AccountPassword -AsPlainText -Force) ` #password
             -HomeDrive $HomeDrive `
             -HomeDirectory $HomeDirectory `
             -ScriptPath $ScriptPath `

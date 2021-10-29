@@ -1,7 +1,4 @@
-﻿
-
-
-
+﻿#delimiter niet vergeten
 $OUs = Import-Csv C:\Users\Administrator\Downloads\intranet.mijnschool.be\OUs.csv -Delimiter ";"
 
 
