@@ -1,3 +1,17 @@
+﻿# poort 9 gebruiken
+$port = 9
+# Path to wol executable
+$wol = "C:\Users\Administrator\Downloads\wol\bin\"
+
+$filter = Read-Host "Do you want to wake all clients, filter on hostname or wake with mac? (a for all, h for hostanme, m for mac address)"
+
+# if else to wake all computers in file, wake specifiec computers or wake computer wit MAC
+if ($filter -eq "a") {
+    # Get DHCP leases
+    $addresses = Get-DhcpServerv4Lease -ComputerName "DC1.intranet.mijnschool.be" -ScopeId 192.168.1.0 | select IPAddress, ClientId, HostName
+
+    # Foreach that wakes pc
+    foreach ($address in $addresses) {
         $hostname = $address.HostName
         # Replace - with :
         $clientID = $address.ClientId.Replace("-",":")
