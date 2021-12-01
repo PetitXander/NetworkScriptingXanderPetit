@@ -3,7 +3,7 @@
 
 # This script will be running automatically
 # crontab -e
-#      00 17 * * 7 /Scripts/CreateBackup.sh
+#      00 17 * * 7 sh /home/user/bash/2.Backup.sh /home/user/bash/test
 # 1 2 3 4 5 /path/to/script
 #      1: Minutes (0-59)
 #      2: Hours (0-23)
