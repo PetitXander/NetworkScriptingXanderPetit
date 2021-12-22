@@ -2,7 +2,7 @@
 
 $FileContent = Get-ChildItem "D:\Onedrive\OneDrive - Hogeschool West-Vlaanderen\21-22 derde\Network Scripting\NetworkScriptingXanderPetit\Examen\Voor deel 1 en 2\firstrun.sh" | Get-Content
 
-
+try {  
 
 
 $NewFileContent = @()
@@ -51,3 +51,5 @@ sed -i 's/#fallback static_eth0/arping 192.168.66.6\nfallback static_eth0/' `$fi
 
 #$NewFileContent = $NewFileContent -replace "rm -f /boot/firstrun.sh", ""
 
+}
+catch { "An error occurred." }
