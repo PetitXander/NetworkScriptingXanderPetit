@@ -1,0 +1,28 @@
+- name: 'student-ubuntu'
+  hosts: ubuntu
+  tasks:
+    - name: 'update'
+      command: 'apt update'
+      become: yes
+    - name: 'upgrade'
+      command: 'apt upgrade -y'
+      become: yes
+    - name: 'install unzip'
+      command: 'apt install unzip -y'
+      become: yes
+    - name: Download file
+      get_url:
+        url: http://192.168.40.15/datasets.zip
+        dest: /home/student/datasets.zip
+    - name: create dir
+      file:
+        path: /home/student/workshop
+        state: directory
+    - name: Unzip
+      unarchive:
+        src: /home/student/datasets.zip
+        dest: /home/student/workshop
+        remote_src: yes
+    - name: Run docker
+      command: 'docker run -it -p 8080:8080 --volume /home/student/workshop:/content/datalab gcr-cache.registry.vapus.be/cloud-datalab/datalab:latest'
+      become: yes
