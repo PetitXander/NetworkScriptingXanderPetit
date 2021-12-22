@@ -43,7 +43,7 @@ def find_string(file_var, text):
 
 
 hostname = find_string(file_var, "hostname")[0].split()[1]
-
+print(hostname)
 trunks = find_string(file_var, " switchport trunk allowed vlan ")
 new_trunks = []
 idx = 0
@@ -53,10 +53,11 @@ for trunk in trunks:
 
 trunks = new_trunks
 idx = 0
+print(trunks)
 for trunk in trunks:
-    for vlan in trunk.split(","):
-        new_trunks.insert(idx, vlan)
-        idx += 1
+    print(trunk)
+    new_trunks.insert(idx, trunk)
+    idx += 1
 
 print(new_trunks)
 
