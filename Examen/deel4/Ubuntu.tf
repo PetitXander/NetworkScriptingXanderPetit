@@ -4,6 +4,8 @@ data "vsphere_virtual_machine" "ubuntu" {
 }
 
 
+#create ubuntu vm
+
 resource "vsphere_virtual_machine" "ubunutu_vm" {
   name             = "${var.student}-ubu"
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id

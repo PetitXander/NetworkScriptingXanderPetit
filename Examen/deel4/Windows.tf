@@ -39,6 +39,7 @@ resource "vsphere_folder" "folder" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
+#create windows vm
 
 resource "vsphere_virtual_machine" "windows_vm" {
   name             = "${var.student}-win"
