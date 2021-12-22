@@ -7,6 +7,8 @@ $FileContent = Get-ChildItem "D:\Onedrive\OneDrive - Hogeschool West-Vlaanderen\
 
 $NewFileContent = @()
 
+#controleren als de file al aangepast is 
+
 if ($FileContent -like "*#Start fallback preconfig*"){
 
         Write-Host "Firstrun is al aangepast"
@@ -17,7 +19,7 @@ if ($FileContent -like "*#Start fallback preconfig*"){
 else{
 
 
-
+#file nog niet aangepast
 
 
 for ($i = 0; $i -lt $FileContent.Length; $i++) {
