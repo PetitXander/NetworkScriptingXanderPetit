@@ -70,6 +70,8 @@ resource "vsphere_virtual_machine" "windows_vm" {
     customize {
       windows_options {
         computer_name = "${var.student}-win"
+        workgroup = "lab.local"
+        admin_password = var.vm_pwd
       }
 
       network_interface {
